@@ -1,0 +1,35 @@
+name: Publish recovered source
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    if: ${{ hashFiles('source-parts/*') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Restore the complete website source
+        shell: bash
+        run: |
+          cat source-parts/evangelismos-source.tar.gz.part-* > /tmp/evangelismos-source.tar.gz
+          test "$(sha256sum /tmp/evangelismos-source.tar.gz | cut -d ' ' -f1)" = "e96fab1b08d536e5d76863a0c7890cb630894fc5094c5ce5f8c7af03a2fc96dc"
+          tar -xzf /tmp/evangelismos-source.tar.gz
+          rm -rf source-parts
+          rm -f .github/workflows/publish-recovered-source.yml
+
+      - name: Commit the restored project
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish Evangelismos Music website"
+          git push
