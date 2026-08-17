@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ivory: var(--ivory);
+  --color-ivory-dim: var(--ivory-dim);
+  --color-ivory-faint: var(--ivory-faint);
+  --color-brass: var(--brass);
+  --color-brass-bright: var(--brass-bright);
+  --color-brass-deep: var(--brass-deep);
+  --color-sale: var(--sale);
+  --color-ok: var(--ok);
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xs: calc(var(--radius) - 6px);
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-glow: 0 8px 40px rgba(200, 164, 93, 0.18);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 32s linear infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-dash-flow: dash-flow 2.4s linear infinite;
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50% { opacity: 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.75); }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -26; }
+}
+
+@layer base {
+  :root {
+    /* Noir Concert Hall palette */
+    --ink: #0A0A0C;
+    --ink-2: #111114;
+    --surface: #17171C;
+    --surface-2: #1E1E25;
+    --line: #2A2A33;
+    --ivory: #F4EFE4;
+    --ivory-dim: #A7A39B;
+    --ivory-faint: #6B6862;
+    --brass: #C8A45D;
+    --brass-bright: #E6C685;
+    --brass-deep: #8F6F3A;
+    --sale: #E5484D;
+    --ok: #4CC38A;
+
+    /* shadcn compatibility tokens */
+    --background: 240 9% 4%;
+    --foreground: 43 35% 92%;
+    --card: 240 8% 10%;
+    --card-foreground: 43 35% 92%;
+    --popover: 240 8% 10%;
+    --popover-foreground: 43 35% 92%;
+    --primary: 38 45% 57%;
+    --primary-foreground: 240 9% 4%;
+    --secondary: 240 7% 12%;
+    --secondary-foreground: 43 35% 92%;
+    --muted: 240 7% 12%;
+    --muted-foreground: 40 5% 63%;
+    --accent: 38 45% 57%;
+    --accent-foreground: 240 9% 4%;
+    --destructive: 358 75% 59%;
+    --destructive-foreground: 43 35% 92%;
+    --border: 240 9% 18%;
+    --input: 240 9% 18%;
+    --ring: 38 45% 57%;
+    --radius: 0.75rem;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--ink);
+    color: var(--ivory);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--brass);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--surface-2);
+  }
+}
+
+@layer components {
+  /* Eyebrow / mono label */
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--brass);
+  }
+
+  .display-xl {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  .display-l {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5vw, 4.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+
+  .display-m {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.05;
+  }
+
+  .container-site {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 48px;
+    }
+  }
+
+  /* Primary brass pill button */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--brass);
+    color: var(--ink);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.875rem 1.75rem;
+    transition: background 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary:hover {
+    background: var(--brass-bright);
+    transform: scale(1.02);
+    box-shadow: 0 8px 40px rgba(200, 164, 93, 0.18);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ivory);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.875rem 1.75rem;
+    transition: border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-secondary:hover {
+    border-color: var(--brass);
+    color: var(--brass);
+    transform: scale(1.02);
+  }
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
+
+  /* Fine noise overlay for dark sections */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Dotted map-grid texture */
+  .dot-grid {
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
