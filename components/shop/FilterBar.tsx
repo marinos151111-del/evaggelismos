@@ -205,7 +205,7 @@ export default function FilterBar(props: FilterBarProps) {
       initial={{ y: '-100%' }}
       animate={{ y: '0%' }}
       transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-[72px] z-40 border-b border-line bg-ink/90 backdrop-blur-[12px]"
+      className="mobile-scroll-layer sticky top-[72px] z-40 border-b border-line bg-ink lg:bg-ink/90 lg:backdrop-blur-[12px]"
     >
       <div className="container-site">
         {/* Row 1 — category pills */}

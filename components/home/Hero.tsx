@@ -59,7 +59,9 @@ export default function Hero() {
     () => {
       const hero = heroRef.current;
       if (!hero || !mouseWrapRef.current || !spotRef.current) return;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce), (hover: none), (pointer: coarse), (max-width: 767px)'
+      ).matches;
       if (reduced) return;
 
       const pianoX = gsap.quickTo(mouseWrapRef.current, 'x', { duration: 0.9, ease: 'power3.out' });
@@ -85,7 +87,9 @@ export default function Hero() {
   // Load timeline + scroll parallax
   useGSAP(
     () => {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce), (hover: none), (pointer: coarse), (max-width: 767px)'
+      ).matches;
       if (reduced) {
         gsap.set('.hero-char', { yPercent: 0, rotate: 0 });
         gsap.set(['.hero-word', '.hero-fade', floatRef.current, marqueeRef.current], {

@@ -51,7 +51,7 @@ export default function Navbar({ announcementVisible, onDismissAnnouncement }: N
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50">
+      <header className="mobile-scroll-layer fixed inset-x-0 top-0 z-50">
         {/* Announcement bar */}
         <AnimatePresence initial={false}>
           {announcementVisible && (
@@ -85,8 +85,9 @@ export default function Navbar({ announcementVisible, onDismissAnnouncement }: N
 
         {/* Main nav */}
         <nav
-          className="border-b border-line backdrop-blur-[14px] transition-colors duration-300"
-          style={{ background: scrolled ? 'var(--ink)' : 'rgba(10,10,12,0.72)' }}
+          className={`border-b border-line bg-ink transition-colors duration-300 ${
+            scrolled ? '' : 'lg:bg-ink/70 lg:backdrop-blur-[14px]'
+          }`}
         >
           <div className="container-site flex h-[72px] items-center justify-between gap-4">
             <Link to="/" aria-label="Evangelismos Music Stores — home" className="shrink-0">

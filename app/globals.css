@@ -297,3 +297,30 @@
     display: none;
   }
 }
+
+/*
+ * Mobile scroll stability.
+ * iOS Safari and some Android GPUs can flash a full viewport when fixed or
+ * sticky backdrop filters are composited above transformed/blended content.
+ * Keep the richer effects on desktop and use stable native layers on touch.
+ */
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  .mobile-scroll-layer {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .noise::after {
+    display: none;
+  }
+
+  .mix-blend-multiply {
+    mix-blend-mode: normal !important;
+  }
+}
